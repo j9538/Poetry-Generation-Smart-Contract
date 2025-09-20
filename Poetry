@@ -1,0 +1,13 @@
+# PoetryChain
+
+PoetryChain is a Solidity smart contract for generating and storing poems on Ethereum.
+
+## Features
+- Generate poems on-chain based on user prompts.
+- Retrieve poems using unique IDs.
+- Optional NFT minting of generated poems.
+
+## Deployment
+1. Install dependencies: `npm install`
+2. Deploy: `npx hardhat run scripts/deploy.js --network rinkeby`
+3. Interact via Hardhat console or integrate with a front-end.
