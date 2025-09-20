@@ -1,0 +1,42 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+contract PoetryChain {
+    struct Poem {
+        uint id;
+        string title;
+        string author;
+        string content;
+        uint timestamp;
+    }
+
+    Poem[] public poems;
+    uint private nextId = 1;
+
+    event PoemCreated(uint id, string title, string author);
+
+    function generatePoem(string memory title, string memory author, string memory content) public returns(uint) {
+        Poem memory newPoem = Poem({
+            id: nextId,
+            title: title,
+            author: author,
+            content: content,
+            timestamp: block.timestamp
+        });
+
+        poems.push(newPoem);
+        emit PoemCreated(nextId, title, author);
+        nextId++;
+
+        return newPoem.id;
+    }
+
+    function getPoem(uint id) public view returns(Poem memory) {
+        require(id > 0 && id < nextId, "Poem does not exist");
+        return poems[id - 1];
+    }
+
+    function totalPoems() public view returns(uint) {
+        return poems.length;
+    }
+}
